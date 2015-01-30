@@ -1,0 +1,2 @@
+# JGTerminal
+Terminal for JGFramework
