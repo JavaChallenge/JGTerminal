@@ -1,0 +1,205 @@
+@import "lib/bootstrap/variables";
+@import "lib/for";
+@import "lib/material-colors";
+
+html {
+  height: 100%;
+}
+
+body {
+  background: #f5f5f5;
+  height: 100%;
+  padding-top: @grid-gutter-width/2;
+  padding-bottom: @grid-gutter-width/2;
+}
+
+.sticky-top {
+  margin-top: -@grid-gutter-width/2;
+}
+
+.sticky-bottom {
+  margin-bottom: -@grid-gutter-width/2;
+}
+
+.paddingy {
+  padding: @grid-gutter-width/2;
+}
+
+.sticky {
+  margin-left: -@grid-gutter-width/2;
+  margin-right: -@grid-gutter-width/2;
+  margin-top: -@grid-gutter-width/2;
+  margin-bottom: -@grid-gutter-width/2;
+}
+
+.sticky > .table {
+  margin-bottom: 0;
+}
+
+.sticky > .form-control, .sticky > .btn-block, .sticky > pre {
+  border-left: none;
+  border-right: none;
+}
+
+.sticky > .form-control:not(.first),
+.sticky > .btn-block:not(.first),
+.sticky > pre:not(.first) {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.sticky > .form-control.first,
+.sticky > .btn-block.first,
+.sticky > pre.first {
+  border-top: none;
+}
+
+.sticky > .form-control.last,
+.sticky > .btn-block.last,
+.sticky > pre.last {
+  border-bottom: none;
+}
+
+.sticky > .form-control:not(.last),
+.sticky > .btn-block:not(.last),
+.sticky > pre:not(.last) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.splitter {
+  height: @grid-gutter-width/2;
+}
+
+.splitter-half {
+  height: @grid-gutter-width/4;
+}
+
+.alert-error {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.alert-error hr {
+  border-top-color: #e4b9c0;
+}
+
+.alert-error .alert-link {
+  color: #843534;
+}
+
+.table pre {
+  white-space: pre-wrap;
+}
+
+.terminal {
+  background: #000000;
+  color: #00ff00;
+}
+
+.label-group {
+  display: table;
+  background: transparent !important;
+  vertical-align: middle;
+  min-height: 34px;
+  word-spacing: 0;
+  & > span {
+    word-spacing: normal;
+    display: table-cell;
+    padding: 0.3em 0.6em 0.2em;
+    border: 1px solid;
+    &:first-child {
+      border-bottom-left-radius: 0.25em;
+      border-top-left-radius: 0.25em;
+    }
+    &:last-child {
+      border-bottom-right-radius: 0.25em;
+      border-top-right-radius: 0.25em;
+    }
+    &:not(:first-child) {
+      border-left: none;
+    }
+    &:not(:last-child) {
+      border-right: none;
+    }
+  }
+
+  .form-control {
+    display: table-cell;
+    width: auto;
+    &:not(:first-child) {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      border-left: none;
+    }
+    &:not(:last-child) {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right: none;
+    }
+  }
+
+}
+
+& {
+  .for(@md-colors);
+  .-each(@color) {
+    .label-@{color} {
+      & > span.label-lighter, span&.label-lighter {
+        background: ~"@{md-@{color}-50}";
+        border-color: ~"@{md-@{color}-100}";
+        color: @md-black;
+      }
+      & > span.label-light, span&.label-light {
+        background: ~"@{md-@{color}-200}";
+        border-color: ~"@{md-@{color}-300}";
+        color: @md-black;
+      }
+      & > span, span& {
+        background: ~"@{md-@{color}-400}";
+        border-color: ~"@{md-@{color}-500}";
+        color: @md-white;
+      }
+      & > span.label-dark, span&.label-dark {
+        background: ~"@{md-@{color}-600}";
+        border-color: ~"@{md-@{color}-700}";
+        color: @md-white;
+      }
+      & > span.label-darker, span&.label-darker {
+        background: ~"@{md-@{color}-800}";
+        border-color: ~"@{md-@{color}-900}";
+        color: @md-white;
+      }
+    }
+  }
+}
+
+.w {
+  &a {
+    width: auto;
+  }
+  .for(12);
+  .-each(@i) {
+    &@{i} {
+      width: 100% * @i / 12;
+    }
+  }
+}
+
+.hr {
+  border-bottom: 1px solid #ddd;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bolder {
+  font-weight: bolder;
+}
+
+#output {
+  height: 200px;
+  overflow-y: scroll;
+}

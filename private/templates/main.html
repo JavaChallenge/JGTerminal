@@ -1,0 +1,165 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="text-center">JG Terminal</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Choose map</h2>
+        </div>
+        <div class="col-xs-6">
+            <input type="file" class="hidden" jqfy:name="$fileInput">
+            <button class="btn btn-default btn-block" jqfy:name="$fileBtn"><i class="fa fa-file fa-3x"></i></button>
+            <span jqfy:name="$fileOutput" class="text-muted"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>New game</h2>
+        </div>
+        <div class="col-xs-6">
+            <button class="btn btn-default btn-block" jqfy:name="$newGame"><i class="fa fa-plus-square fa-3x"></i>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Run client</h2>
+        </div>
+        <div class="col-xs-6">
+            <pre>$ python main.py
+$ java main.class
+$ ./main.out
+$ node index.js</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Start game</h2>
+        </div>
+        <div class="col-xs-6">
+            <button class="btn btn-default btn-block" jqfy:name="$startBtn"><i class="fa fa-play fa-3x"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Controls</h2>
+        </div>
+        <div class="col-xs-6 text-center" jqfy:name="$btnGroupContainer">
+            <div class="btn-group">
+                <button class="btn btn-default" jqfy:name="$resumeBtn"><i class="fa fa-play fa-2x"></i></button>
+                <button class="btn btn-default" jqfy:name="$pauseBtn"><i class="fa fa-pause fa-2x"></i></button>
+                <button class="btn btn-default" jqfy:name="$stopBtn"><i class="fa fa-stop fa-2x"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <pre jqfy:name="$output" id="output"></pre>
+            <form jqfy:name="$form">
+                <input type="text" class="form-control" jqfy:name="$input">
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+    function appendTerminal(line) {
+        var $span = $('<span>').text(line);
+        $output
+                .append($span)
+                .append('\n')
+                .prop({
+                    scrollTop: $output[0].scrollHeight
+                });
+        return $span;
+    }
+
+    function command(name, args) {
+        app.eventSocket.emit('command', name, args || []);
+        var argStr = _(args)
+                .map(_.ary(JSON.stringify, 1))
+                .join(' ');
+        appendTerminal('$ ' + name + ' ' + argStr).addClass('text-success bolder');
+    }
+
+    app.eventSocket.on('init', function (lines) {
+        appendTerminal('init').addClass('text-danger bolder');
+        _.each(lines, function (line) {
+            appendTerminal(line).addClass('text-danger');
+        })
+    });
+
+    app.eventSocket.on('report', function (lines) {
+        appendTerminal('report').addClass('text-danger bolder');
+        _.each(lines, function (line) {
+            appendTerminal(line).addClass('text-danger');
+        })
+    });
+
+    app.eventSocket.on('connect', function (lines) {
+        appendTerminal('-- connect --').addClass('text-muted');
+    });
+    app.eventSocket.on('disconnect', function (lines) {
+        appendTerminal('-- disconnect --').addClass('text-muted');
+    });
+    app.eventSocket.on('error', function (lines) {
+        appendTerminal('-- error --').addClass('text-muted');
+    });
+
+    $form.on('submit', function (e) {
+        e.preventDefault();
+        var val = $input.val();
+        val = _.trim(val);
+        if (val) {
+            var args = val.split(/\s+/);
+            var name = args.shift();
+            command(name, args);
+            $input.val('');
+        }
+        return false;
+    });
+
+    $fileInput.on('change', function () {
+        var val = $fileInput.val();
+        if (val) {
+            var path = require('path');
+            var name = path.basename(val);
+            $fileOutput.text(name + ' selected.');
+        } else {
+            $fileOutput.text('');
+        }
+    });
+
+    $fileBtn.on('click', function () {
+        $fileInput.click();
+    });
+
+    $newGame.on('click', function () {
+        var val = $fileInput.val();
+        if (val) {
+            command('newGame', [val]);
+        }
+    });
+
+    $startBtn.on('click', function () {
+        command('startGame');
+    });
+
+    $resumeBtn.on('click', function () {
+        command('resumeGame');
+    });
+    $pauseBtn.on('click', function () {
+        command('pauseGame');
+    });
+
+    $stopBtn.on('click', function () {
+        command('endGame');
+    });
+
+    $resumeBtn.tooltip({container: $btnGroupContainer, title: 'Resume game'});
+    $pauseBtn.tooltip({container: $btnGroupContainer, title: 'Pause game'});
+    $stopBtn.tooltip({container: $btnGroupContainer, title: 'End game'});
+
+</script>

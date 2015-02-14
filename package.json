@@ -1,0 +1,27 @@
+{
+  "name": "JGTerminal",
+  "version": "1.0.0",
+  "description": "Terminal for JGFramework",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JavaChallenge/JGTerminal.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JavaChallenge/JGTerminal/issues"
+  },
+  "homepage": "https://github.com/JavaChallenge/JGTerminal",
+  "window": {
+    "toolbar": true,
+    "width": 800,
+    "height": 750
+  },
+  "dependencies": {
+    "eventsocket": "^1.0.3"
+  }
+}

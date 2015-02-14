@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <i class="fa fa-warning fa-5x text-danger"></i>
+            <br>
+
+            <h1 class="text-danger">Connection Failed</h1>
+            <strong>Check your server</strong>
+            <button class="btn btn-default" jqfy:name="$tryBtn">try again</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $tryBtn.on('click', function () {
+        console.log('reconnect');
+        app.eventSocket.connect(app.port);
+    });
+</script>
