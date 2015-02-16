@@ -33,37 +33,25 @@
             });
 
         io
-            .to('_clients')
             .on('info', function (info) {
                 topNav.setViews(info.views);
                 topNav.setView('global');
                 board.setMapSize(info.mapSize);
-
-                _(info.views)
-                    .each(function (view) {
-                        io
-                            .to(view)
-                            .on('turn', function (turn, data) {
-                                if (view == _view) {
-                                    board.emit('turn', data);
-                                }
-                            });
-                        io
-                            .to(view)
-                            .on('diff', function (diff) {
-                                if (view == _view) {
-                                    board.setDiff(diff);
-                                }
-                            });
-                    })
-                    .value();
             });
         io
-            .to('_clients')
             .on('map', function (map) {
                 _map = map;
                 board.setMap(map);
             });
+        io
+            .on('diff', function (diff) {
+                board.setDiff(diff);
+            });
+        io
+            .on('turn', function (turn, data) {
+                board.emit('turn', data);
+            });
+
     }
 
     window.Display = Display;

@@ -72,7 +72,7 @@ $(function () {
         setTimeout(function () {
 
             client = new Client(io, app.uPort, app.host);
-            display = new Display(io, client);
+            display = new Display(ioClient(), client);
         }, 100);
     });
 
