@@ -8,7 +8,6 @@
 
 
         var client = this;
-        client.io = io;
         var info = {};
         var diff = {};
         var map = {};

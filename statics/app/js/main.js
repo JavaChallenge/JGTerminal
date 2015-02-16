@@ -36,7 +36,7 @@ $(function () {
         setTimeout(function () {
 
             client = new Client(io, app.uPort, app.host);
-            display = new Display(client);
+            display = new Display(io, client);
         }, 100);
     });
 

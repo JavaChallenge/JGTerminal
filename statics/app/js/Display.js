@@ -2,7 +2,7 @@
     var _ = require('lodash');
     var log = require('debug')('JGF:display');
 
-    function Display(client) {
+    function Display(io, client) {
         var topNav = templates.topNav();
         var board = templates.board();
         board.$.appendTo('body');
@@ -29,7 +29,7 @@
                 app.eventSocket.emit('command', 'exit', []);
             });
 
-        client.io
+        io
             .to('_clients')
             .on('info', function (info) {
                 topNav.setViews(info.views);
@@ -38,14 +38,14 @@
 
                 _(info.views)
                     .each(function (view) {
-                        client.io
+                        io
                             .to(view)
                             .on('turn', function (turn, data) {
                                 if (view == _view) {
                                     board.emit('turn', data);
                                 }
                             });
-                        client.io
+                        io
                             .to(view)
                             .on('diff', function (diff) {
                                 if (view == _view) {
@@ -55,7 +55,7 @@
                     })
                     .value();
             });
-        client.io
+        io
             .to('_clients')
             .on('map', function (map) {
                 _map = map;
