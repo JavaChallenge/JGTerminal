@@ -56,8 +56,6 @@
                         .value();
                 _(statics)
                         .each(function (item, id) {
-                            log('-------');
-                            log(arguments);
                             if (mapById[id] == undefined) {
                                 item.remove();
                                 delete statics[id];
