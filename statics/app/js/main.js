@@ -29,6 +29,42 @@ $(function () {
         };
     })();
 
+    window.ioClient = function () {
+        var ioSocket = new IOSocket();
+        var socket = ioSocket.serverSocket;
+
+        io.to('_client').on('info', function (info) {
+            _(info.views)
+                .each(function (view) {
+                    io
+                        .to(view)
+                        .on('turn', function (turn, data) {
+                            var _view = display.getView();
+                            if (view == _view) {
+                                socket.emit('turn', data);
+                            }
+                        });
+                    io
+                        .to(view)
+                        .on('diff', function (diff) {
+                            var _view = display.getView();
+                            if (view == _view) {
+                                socket.setDiff(diff);
+                            }
+                        });
+                })
+                .value();
+        });
+        io.to('_clients').on('map', function (map) {
+            socket.emit('map', map);
+        });
+
+        setTimeout(function () {
+            socket.emit('connect');
+        }, 100);
+        return ioSocket.clientSocket;
+    };
+
     fileModal.on('newGame', function (val) {
         app.eventSocket.emit('command', 'newGame', [val]);
         fileModal.hide();

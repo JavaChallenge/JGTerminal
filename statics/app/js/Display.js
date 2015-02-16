@@ -9,6 +9,9 @@
         topNav.$.appendTo('body');
         var _map = [];
         var _view = null;
+        this.getView = function () {
+            return _view;
+        };
         topNav.on('view', function (view) {
             log(view);
             _view = view;
