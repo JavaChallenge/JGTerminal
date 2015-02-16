@@ -5,8 +5,10 @@
     function Display(io) {
         var topNav = templates.topNav();
         var board = templates.board();
-        board.$.appendTo('body');
+        var infoBoard = templates.info();
         topNav.$.appendTo('body');
+        infoBoard.$.appendTo('body');
+        board.$.appendTo('body');
         var _map = [];
         var _view = null;
         this.getView = function () {
@@ -56,6 +58,7 @@
             .on('turn', function (turn, data) {
                 //log('turn' + turn);
                 //log(data);
+                infoBoard.emit('turn', turn);
                 board.emit('turn', data);
             });
 

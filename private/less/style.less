@@ -7,7 +7,7 @@ html {
 }
 
 body {
-//  background: #f5f5f5;
+  //  background: #f5f5f5;
   background-color: #333;
   height: 100%;
   padding-top: @grid-gutter-width/2 + @navbar-height;
@@ -260,7 +260,7 @@ body {
   height: @block-size;
   background-color: #64C7CC;
   margin: 0 (@block-size * 0.2887);
-  transition: background-color 1s,opacity 1s;
+  transition: background-color 1s, opacity 1s;
 }
 
 .block:before,
@@ -283,7 +283,6 @@ body {
   width: 0;
   border-left: @block-size * 0.2887 solid #64C7CC;
 }
-
 
 & {
   .for(0, 9);
@@ -336,7 +335,7 @@ body {
 [data-type="none"] {
   .for(0, 9);
   .-each(@i) {
-    @color: hsl(0, 0,.5);
+    @color: hsl(0, 0, .5);
     &[data-height="@{i}"] {
       background-color: @color;
     }
@@ -359,4 +358,14 @@ body {
   left: -2px;
   right: 0;
   bottom: 0;
+}
+
+.info {
+  color: hsl(183, 0.5, 0.5);
+  position: absolute;
+  top: @grid-gutter-width / 2 + @navbar-height;
+  left: @grid-gutter-width / 2;
+  width: 80px;
+  font-weight: bolder;
+  font-family: monospace;
 }

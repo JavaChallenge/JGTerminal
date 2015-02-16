@@ -7,6 +7,9 @@ $(function () {
     app.tPort = 7001;
     app.uPort = 7000;
     app.host = '127.0.0.1';
+    if (process.env.JGF_HOST !== undefined) {
+        app.host = process.env.JGF_HOST;
+    }
     app.eventSocket = new EventSocket(app.tPort, app.host);
 
     var loadingModal = templates.loadingModal();
@@ -82,6 +85,9 @@ $(function () {
     };
 
     fileModal.on('newGame', function (val) {
+        if (process.env.JGF_MAP_PATH !== undefined) {
+            val = process.env.JGF_MAP_PATH;
+        }
         app.eventSocket.emit('command', 'newGame', [val]);
         fileModal.hide();
         startGameModal.show();
