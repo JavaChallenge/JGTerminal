@@ -4,6 +4,10 @@ $(function () {
     var log = require('debug')('JGF:main');
 
     window.app = {};
+
+    app.consts = {};
+    app.consts.MAX_CELL_ENERGY = 100;
+
     app.tPort = 7001;
     app.uPort = 7000;
     app.host = '127.0.0.1';

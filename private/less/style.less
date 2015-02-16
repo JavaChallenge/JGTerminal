@@ -241,17 +241,17 @@ body {
 }
 
 @block-size: 25px;
-@cell-size: 11px;
+@cell-size: 23px;
 
 [data-type=cell] {
-  transition: bottom 1s, left 1s;
+  transition: bottom 1s, left 1s,background-color 1s, -webkit-transform 1s;
   position: absolute;
   width: @cell-size;
   height: @cell-size;
   border-radius: @cell-size;
   margin-bottom: (@block-size - @cell-size) / 2;
   margin-left: (@block-size * 0.2887 / 2 + @block-size - @cell-size) / 2;
-  background-color: #ffff00;
+  background-color: hsl(60,1,0.5);
 }
 
 .block {
@@ -368,4 +368,14 @@ body {
   width: 80px;
   font-weight: bolder;
   font-family: monospace;
+}
+
+[data-type="cell"] {
+  .for(0, 10);
+  .-each(@i) {
+    &[data-level="@{i}"] {
+      background-color: hsl(60 - @i * 4,1,0.5);
+      -webkit-transform: scale(0.4 + @i * 0.03);
+    }
+  }
 }

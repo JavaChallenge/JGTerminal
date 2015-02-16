@@ -6,18 +6,26 @@
         $d.css('bottom', (y - 0.5 * (x % 2)) * 27);
     }
 
+    function calcEnergyLevel(energy) {
+        return Math.floor(10* energy / app.consts.MAX_CELL_ENERGY);
+    }
+
     var _item;
     obj.setData = function (item) {
         _item = item;
         setPos($item, item.position.x, item.position.y);
         $item.attr('data-type', item.type);
+        if (item.type == 'cell' && item.other != undefined) {
+            var eLevel = calcEnergyLevel(item.other.energy);
+            $item.attr('data-level', eLevel);
+        }
     };
 
-    obj.getData = function(){
+    obj.getData = function () {
         return _item;
     };
 
-    obj.remove = function(){
+    obj.remove = function () {
         obj.$.remove();
     }
 
