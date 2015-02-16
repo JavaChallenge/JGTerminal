@@ -1,0 +1,52 @@
+<div class="modal fade" tabindex="-1" jqfy:name="$modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" jqfy:name="$title">Run clients</h4>
+            </div>
+            <div class="modal-body" jqfy:name="$body">
+                <div class="text-center">
+                    <pre>$ python main.py
+$ java main.class
+$ ./main.out
+$ node index.js</pre>
+                </div>
+            </div>
+            <div class="modal-footer" jqfy:name="$footer">
+                <button type="button" class="btn btn-success disabled" jqfy:name="$startBtn">Start game</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    obj.$modal = $modal;
+    obj.$title = $title;
+    obj.$body = $body;
+    obj.$footer = $footer;
+
+    var events = require('events');
+    $.extend(obj, events.EventEmitter.prototype);
+
+    $modal.modal({
+        keyboard: false,
+        backdrop: 'static'
+    });
+
+    obj.show = function () {
+        $modal.appendTo('body');
+        $modal.modal('show');
+    };
+    obj.hide = function () {
+        $modal.modal('hide');
+        $modal.remove();
+    };
+    $startBtn.on('click', function () {
+        obj.emit('startGame');
+    });
+    app.eventSocket.on('report', function (args) {
+        if (args && args[0] == 'ready') {
+            $startBtn
+                    .removeClass('disabled');
+        }
+    });
+</script>

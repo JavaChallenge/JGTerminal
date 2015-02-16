@@ -1,0 +1,50 @@
+<div class="modal fade" tabindex="-1" jqfy:name="$modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" jqfy:name="$title">Connecting ...</h4>
+            </div>
+            <div class="modal-body" jqfy:name="$body">
+                <div class="text-center">
+                    <i class="fa fa-spin fa-spinner fa-5x" jqfy:name="$icon"></i>
+
+                    <div jqfy:name="$text"></div>
+                </div>
+            </div>
+            <div class="modal-footer" jqfy:name="$footer">
+                <button type="button" class="btn btn-default" jqfy:name="$tryBtn">Try again</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    obj.$modal = $modal;
+    obj.$title = $title;
+    obj.$body = $body;
+    obj.$footer = $footer;
+
+    $modal.modal({
+        keyboard: false,
+        backdrop: 'static'
+    });
+
+    obj.show = function () {
+        $modal.appendTo('body');
+        $modal.modal('show');
+    };
+    obj.hide = function () {
+        $modal.modal('hide');
+        $modal.remove();
+    };
+    $tryBtn.on('click', function () {
+        app.eventSocket.connect(app.tPort, app.host);
+    });
+    app.eventSocket.on('error', function () {
+        $icon
+                .removeClass('fa-spin fa-spinner')
+                .addClass('text-danger fa-warning');
+        $text
+                .addClass('text-danger')
+                .text('Connection failed')
+    });
+</script>

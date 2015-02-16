@@ -7,9 +7,10 @@ html {
 }
 
 body {
-  background: #f5f5f5;
+//  background: #f5f5f5;
+  background-color: #333;
   height: 100%;
-  padding-top: @grid-gutter-width/2;
+  padding-top: @grid-gutter-width/2 + @navbar-height;
   padding-bottom: @grid-gutter-width/2;
 }
 
@@ -202,4 +203,158 @@ body {
 #output {
   height: 200px;
   overflow-y: scroll;
+}
+
+.board-container {
+  position: fixed;
+  top: @grid-gutter-width/2 + @navbar-height;
+  bottom: @grid-gutter-width/2;
+  left: @grid-gutter-width/2;
+  right: @grid-gutter-width/2;
+}
+
+.board {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  transition: -webkit-transform 1.75s;
+}
+
+.board {
+  -webkit-transform: perspective(600px) rotateX(0deg);
+  -moz-transform: perspective(600px) rotateX(0deg);
+  -ms-transform: perspective(600px) rotateX(0deg);
+  -o-transform: perspective(600px) rotateX(0deg);
+  transform: perspective(600px) rotateX(0deg);
+}
+
+.board3d .board {
+  -webkit-transform: perspective(600px) rotateX(45deg);
+  -moz-transform: perspective(600px) rotateX(45deg);
+  -ms-transform: perspective(600px) rotateX(45deg);
+  -o-transform: perspective(600px) rotateX(45deg);
+  transform: perspective(600px) rotateX(45deg);
+}
+
+@block-size: 25px;
+@cell-size: 11px;
+
+[data-type=cell] {
+  transition: bottom 1s, left 1s;
+  position: absolute;
+  width: @cell-size;
+  height: @cell-size;
+  border-radius: @cell-size;
+  margin-bottom: (@block-size - @cell-size) / 2;
+  margin-left: (@block-size * 0.2887 / 2 + @block-size - @cell-size) / 2;
+  background-color: #ffff00;
+}
+
+.block {
+  position: absolute;
+  width: @block-size * 0.5774;
+  height: @block-size;
+  background-color: #64C7CC;
+  margin: 0 (@block-size * 0.2887);
+}
+
+.block:before,
+.block:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-bottom: 0.5 * @block-size solid transparent;
+  border-top: 0.5 * @block-size solid transparent;
+}
+
+.block:before {
+  right: 100%;
+  border-right: @block-size * 0.2887 solid #64C7CC;
+}
+
+.block:after {
+  left: 100%;
+  width: 0;
+  border-left: @block-size * 0.2887 solid #64C7CC;
+}
+
+
+& {
+  .for(0, 9);
+  .-each(@i) {
+    @color: hsl(183, 0.5,.3 + @i*0.05);
+    &[data-height="@{i}"] {
+      background-color: @color;
+    }
+    &[data-height="@{i}"]:before {
+      border-right-color: @color;
+    }
+    &[data-height="@{i}"]:after {
+      border-left-color: @color;
+    }
+  }
+}
+
+[data-type="resource"] {
+  .for(0, 9);
+  .-each(@i) {
+    @color: hsl(140, 0.5,.3 + @i*0.05);
+    &[data-height="@{i}"] {
+      background-color: @color;
+    }
+    &[data-height="@{i}"]:before {
+      border-right-color: @color;
+    }
+    &[data-height="@{i}"]:after {
+      border-left-color: @color;
+    }
+  }
+}
+
+[data-type="mitosis"] {
+  .for(0, 9);
+  .-each(@i) {
+    @color: hsl(270, 0.5,.3 + @i*0.05);
+    &[data-height="@{i}"] {
+      background-color: @color;
+    }
+    &[data-height="@{i}"]:before {
+      border-right-color: @color;
+    }
+    &[data-height="@{i}"]:after {
+      border-left-color: @color;
+    }
+  }
+}
+
+[data-type="none"] {
+  .for(0, 9);
+  .-each(@i) {
+    @color: hsl(0, 0,.5);
+    &[data-height="@{i}"] {
+      background-color: @color;
+    }
+    &[data-height="@{i}"]:before {
+      border-right-color: @color;
+    }
+    &[data-height="@{i}"]:after {
+      border-left-color: @color;
+    }
+  }
+}
+
+[data-type="impassable"] {
+  opacity: 0;
+}
+
+.block .static-icon {
+  position: absolute;
+  top: 5px;
+  left: -2px;
+  right: 0;
+  bottom: 0;
 }

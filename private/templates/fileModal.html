@@ -1,0 +1,70 @@
+<div class="modal fade" tabindex="-1" jqfy:name="$modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" jqfy:name="$title">Choose map</h4>
+            </div>
+            <div class="modal-body" jqfy:name="$body">
+                <div class="text-center">
+                    <input type="file" class="hidden" jqfy:name="$fileInput">
+                    <button type="button" class="btn btn-default" jqfy:name="$btn">
+                        <i class="fa fa-connectdevelop fa-5x"></i>
+                        <br>Choose map
+                    </button>
+                    <br>
+                    <br>
+                    <pre jqfy:name="$fileName" class="hide"></pre>
+                </div>
+            </div>
+            <div class="modal-footer" jqfy:name="$footer">
+                <button type="button" class="btn btn-success disabled" jqfy:name="$newBtn">New game <i
+                        class="fa fa-chevron-right fa-fw"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    obj.$modal = $modal;
+    obj.$title = $title;
+    obj.$body = $body;
+    obj.$footer = $footer;
+
+    var events = require('events');
+    $.extend(obj, events.EventEmitter.prototype);
+
+    $modal.modal({
+        keyboard: false,
+        backdrop: 'static'
+    });
+
+    obj.show = function () {
+        $modal.appendTo('body');
+        $modal.modal('show');
+    };
+    obj.hide = function () {
+        $modal.modal('hide');
+        $modal.remove();
+    };
+
+    obj.$btn = $btn;
+    $btn.on('click', function () {
+        $fileInput.click();
+    });
+    $fileInput.on('change', function () {
+        var val = $fileInput.val();
+        if (val) {
+            $fileName.text(val);
+            $newBtn.removeClass('disabled');
+            $fileName.removeClass('hide');
+        } else {
+            $fileName.text('');
+            $newBtn.addClass('disabled');
+            $fileName.addClass('hide');
+        }
+    });
+    $newBtn.on('click', function () {
+        var val = $fileInput.val();
+        obj.emit('newGame', val);
+    });
+
+</script>

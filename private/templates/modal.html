@@ -1,0 +1,33 @@
+<div class="modal fade" tabindex="-1" jqfy:name="$modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" jqfy:name="$title">{{ title }}</h4>
+            </div>
+            <div class="modal-body" jqfy:name="$body">
+            </div>
+            <div class="modal-footer" jqfy:name="$footer">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    obj.$modal = $modal;
+    obj.$title = $title;
+    obj.$body = $body;
+    obj.$footer = $footer;
+
+    $modal.modal({
+        keyboard: false,
+        backdrop: 'static'
+    });
+
+    obj.show = function () {
+        $modal.appendTo('body');
+        $modal.modal('show');
+    };
+    obj.hide = function () {
+        $modal.modal('hide');
+        $modal.remove();
+    };
+</script>

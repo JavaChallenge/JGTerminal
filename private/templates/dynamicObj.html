@@ -1,0 +1,24 @@
+<div jqfy:name="$item"></div>
+<script>
+
+    function setPos($d, x, y) {
+        $d.css('left', x * 24);
+        $d.css('bottom', (y - 0.5 * (x % 2)) * 27);
+    }
+
+    var _item;
+    obj.setData = function (item) {
+        _item = item;
+        setPos($item, item.position.x, item.position.y);
+        $item.attr('data-type', item.type);
+    };
+
+    obj.getData = function(){
+        return _item;
+    };
+
+    obj.remove = function(){
+        obj.$.remove();
+    }
+
+</script>

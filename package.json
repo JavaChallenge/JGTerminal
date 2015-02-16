@@ -18,8 +18,7 @@
   "homepage": "https://github.com/JavaChallenge/JGTerminal",
   "window": {
     "toolbar": true,
-    "width": 800,
-    "height": 750
+      "fullscreen":true
   },
   "dependencies": {
     "debug": "^2.1.1",

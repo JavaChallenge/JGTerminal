@@ -1,0 +1,48 @@
+<div jqfy:name="$item" class="block"><i class="static-icon fa fa-fw" jqfy:name="$i"></i></div>
+
+<script>
+
+    function setPos($d, x, y) {
+        $d.css('left', x * 24);
+        $d.css('bottom', (y - 0.5 * (x % 2)) * 27);
+    }
+
+    var _item;
+    obj.setData = function (item, force) {
+        if (force == undefined) {
+            force = false;
+        }
+        if ((_item && item.turn < _item.turn) && !force) {
+            return;
+        }
+        _item = item;
+        setPos($item, item.position.x, item.position.y);
+        $item.attr('data-type', item.type);
+        if (item.other && item.other.height !== undefined) {
+            $item.attr('data-height', item.other.height);
+        }
+
+        if (item.type == 'none') {
+            $i.attr('class', 'static-icon fa fa-fw');
+        }
+
+        if (item.type == 'normal') {
+            $i.attr('class', 'static-icon fa fa-fw');
+        }
+        if (item.type == 'resource') {
+            $i.attr('class', 'static-icon fa fa-fw fa-pagelines');
+        }
+        if (item.type == 'mitosis') {
+            $i.attr('class', 'static-icon fa fa-fw fa-share-alt');
+        }
+    };
+
+    obj.getData = function () {
+        return _item;
+    };
+
+    obj.remove = function(){
+        obj.$.remove();
+    }
+
+</script>

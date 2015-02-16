@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Mitosis</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li jqfy:name="$3dli" class="active">
+            <a jqfy:name="$3dBtn">3D/2D</a>
+        </li>
+        <li><a href="#" jqfy:name="$closeBtn">Stop Server</a></li>
+    </ul>
+    <p class="navbar-text">Views:</p>
+    <ul class="nav navbar-nav" jqfy:name="$views"></ul>
+</nav>
+<script>
+    var events = require('events');
+    $.extend(obj, events.EventEmitter.prototype);
+
+    obj.setView = function (view) {
+        $views.find('li').removeClass('active');
+        _views[view].addClass('active');
+        obj.emit('view', view);
+    };
+
+    var _views = {};
+    var _3d = true;
+
+    $3dBtn.on('click', function (e) {
+        e.preventDefault();
+        _3d = !_3d;
+        if (_3d) {
+            $3dli.addClass('active');
+        } else {
+            $3dli.removeClass('active');
+        }
+        obj.emit('3d', _3d);
+        return false;
+    });
+
+    $closeBtn.on('click', function (e) {
+        e.preventDefault();
+        obj.emit('close');
+        return false;
+    });
+
+    obj.setViews = function (views) {
+        _views = {};
+        $views.empty();
+        _(views)
+                .each(function (view) {
+                    var $li = $('<li></li>').appendTo($views);
+                    var $a = $('<a></a>').text(view).appendTo($li);
+
+                    _views[view] = $li;
+
+                    $a.on('click', function (e) {
+                        e.preventDefault();
+                        obj.setView(view);
+                        return false;
+                    });
+                })
+                .value();
+    };
+</script>
