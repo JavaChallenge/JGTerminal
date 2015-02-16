@@ -787,6 +787,7 @@ span.label-blue-grey.label-darker {
   height: 25px;
   background-color: #64C7CC;
   margin: 0 7.2175px;
+  transition: background-color 1s, opacity 1s;
 }
 .block:before,
 .block:after {
@@ -795,6 +796,7 @@ span.label-blue-grey.label-darker {
   width: 0;
   border-bottom: 12.5px solid transparent;
   border-top: 12.5px solid transparent;
+  transition: border-color 1s;
 }
 .block:before {
   right: 100%;

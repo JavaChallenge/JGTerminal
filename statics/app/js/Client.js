@@ -33,7 +33,7 @@
 
         var retry = null;
         socket.on('error', function () {
-            log('error',arguments);
+            log('error', arguments);
             if (retry === null) {
                 retry = setInterval(function () {
                     if (connected) {
@@ -55,8 +55,13 @@
             map = _map || {};
             status = {};
 
+            log('info');
+            log(info);
             io.to('_clients').emit('info', info);
+
+            log('map');
             io.to('_clients').emit('map', map);
+
             io.to('_clients').emit('status', status);
 
             views = {};
@@ -69,7 +74,7 @@
             _(_diff)
                 .each(function (_diffView) {
                     var view = _diffView.view;
-                    log('diff of' + view);
+                    log('diff of ' + view);
                     diff[view] = {};
                     _(_diffView.statics)
                         .each(function (item) {

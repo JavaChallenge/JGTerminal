@@ -1,6 +1,7 @@
 $(function () {
     var EventSocket = require('eventsocket');
     var events = require('events');
+    var log = require('debug')('JGF:main');
 
     window.app = {};
     app.tPort = 7001;
@@ -17,9 +18,8 @@ $(function () {
     loadingModal.show();
 
     var io = new (function () {
-        var iooo = this;
         var rooms = {};
-        iooo.to = function (room) {
+        this.to = function (room) {
             var r = rooms[room];
             if (r == undefined) {
                 r = new events.EventEmitter();
@@ -33,41 +33,51 @@ $(function () {
         var ioSocket = new IOSocket();
         var socket = ioSocket.serverSocket;
         var _view = null;
+
         socket.on('join', function (view) {
             _view = view;
             var data = client.getViewData(view);
-            io
-                .to(view)
+            io.to(view)
                 .emit('diff', data);
         });
-        io.to('_client').on('info', function (info) {
-            _(info.views)
-                .each(function (view) {
-                    io
-                        .to(view)
-                        .on('turn', function (turn, data) {
-                            if (view == _view) {
-                                socket.emit('turn', data);
-                            }
-                        });
-                    io
-                        .to(view)
-                        .on('diff', function (diff) {
-                            var _view = display.getView();
-                            if (view == _view) {
-                                socket.setDiff(diff);
-                            }
-                        });
-                })
-                .value();
-        });
-        io.to('_clients').on('map', function (map) {
-            socket.emit('map', map);
-        });
+
+        io.to('_clients')
+            .on('info', function (info) {
+                log('info');
+                log(info);
+                socket.emit('info', info);
+
+                _(info.views)
+                    .each(function (view) {
+                        io
+                            .to(view)
+                            .on('turn', function (turn, data) {
+                                if (view == _view) {
+                                    socket.emit('turn', turn, data);
+                                }
+                            });
+                        io.to(view)
+                            .on('diff', function (diff) {
+                                log('diff');
+                                var _view = display.getView();
+                                if (view == _view) {
+                                    socket.emit('diff', diff);
+                                }
+                            });
+                    })
+                    .value();
+            });
+
+        io.to('_clients')
+            .on('map', function (map) {
+                log('map');
+                socket.emit('map', map);
+            });
 
         setTimeout(function () {
             socket.emit('connect');
         }, 100);
+
         return ioSocket.clientSocket;
     };
 

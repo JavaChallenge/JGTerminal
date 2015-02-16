@@ -15,7 +15,7 @@
         topNav.on('view', function (view) {
             log(view);
             _view = view;
-            io.emit('join',view);
+            io.emit('join', view);
         });
         topNav.on('3d', function (_3d) {
             if (_3d) {
@@ -32,22 +32,30 @@
 
         io
             .on('info', function (info) {
+                log('info');
+                log(info);
                 topNav.setViews(info.views);
                 topNav.setView('global');
                 board.setMapSize(info.mapSize);
             });
         io
             .on('map', function (map) {
+                log('map');
+                //log(map);
                 _map = map;
                 board.setMap(map);
             });
         io
             .on('diff', function (diff) {
+                log('diff');
+                //log(diff);
                 board.setMap(_map);
                 board.setDiff(diff);
             });
         io
             .on('turn', function (turn, data) {
+                //log('turn' + turn);
+                //log(data);
                 board.emit('turn', data);
             });
 

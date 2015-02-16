@@ -260,6 +260,7 @@ body {
   height: @block-size;
   background-color: #64C7CC;
   margin: 0 (@block-size * 0.2887);
+  transition: background-color 1s,opacity 1s;
 }
 
 .block:before,
@@ -269,6 +270,7 @@ body {
   width: 0;
   border-bottom: 0.5 * @block-size solid transparent;
   border-top: 0.5 * @block-size solid transparent;
+  transition: border-color 1s;
 }
 
 .block:before {
