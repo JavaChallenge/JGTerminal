@@ -32,14 +32,20 @@ $(function () {
     window.ioClient = function () {
         var ioSocket = new IOSocket();
         var socket = ioSocket.serverSocket;
-
+        var _view = null;
+        socket.on('join', function (view) {
+            _view = view;
+            var data = client.getViewData(view);
+            io
+                .to(view)
+                .emit('diff', data);
+        });
         io.to('_client').on('info', function (info) {
             _(info.views)
                 .each(function (view) {
                     io
                         .to(view)
                         .on('turn', function (turn, data) {
-                            var _view = display.getView();
                             if (view == _view) {
                                 socket.emit('turn', data);
                             }

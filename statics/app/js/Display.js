@@ -2,7 +2,7 @@
     var _ = require('lodash');
     var log = require('debug')('JGF:display');
 
-    function Display(io, client) {
+    function Display(io) {
         var topNav = templates.topNav();
         var board = templates.board();
         board.$.appendTo('body');
@@ -15,9 +15,7 @@
         topNav.on('view', function (view) {
             log(view);
             _view = view;
-            board.setMap(_map);
-            var diff = client.getViewData(view);
-            board.setDiff(diff);
+            io.emit('join',view);
         });
         topNav.on('3d', function (_3d) {
             if (_3d) {
@@ -45,6 +43,7 @@
             });
         io
             .on('diff', function (diff) {
+                board.setMap(_map);
                 board.setDiff(diff);
             });
         io
