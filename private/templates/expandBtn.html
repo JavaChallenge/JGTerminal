@@ -1,0 +1,19 @@
+<div id="expand-btn">
+    <a class="btn btn-default" jqfy:name="$btn"><i class="fa fa-2x fa-expand" jqfy:name="$i"></i></a>
+</div>
+<script>
+    var gui = require('nw.gui');
+    var win = gui.Window.get();
+
+    $btn.on('click', function (e) {
+        e.preventDefault();
+        if(win.isFullscreen){
+            $i.removeClass('fa-compress').addClass('fa-expand');
+            win.leaveFullscreen();
+        }else{
+            $i.removeClass('fa-expand').addClass('fa-compress');
+            win.enterFullscreen();
+        }
+        return false;
+    });
+</script>

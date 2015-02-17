@@ -1230,3 +1230,22 @@ span.label-blue-grey.label-darker {
   background-color: #ff5500;
   -webkit-transform: scale(0.7);
 }
+#expand-btn {
+  position: fixed;
+  display: block;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1100;
+  opacity: 0.5;
+}
+#expand-btn:hover {
+  opacity: 1;
+}
+#expand-btn a {
+  width: 60px;
+  height: 60px;
+}
+#expand-btn a i {
+  padding-top: 9px;
+  padding-bottom: 9px;
+}

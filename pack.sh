@@ -1,1 +1,1 @@
-zip -r ../${PWD##*/}-$(date +"%Y-%d-%m_%H-%M").nw *
+zip -r ../${PWD##*/}-$(date +"%Y-%m-%d_%H-%M").nw *

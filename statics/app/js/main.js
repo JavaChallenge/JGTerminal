@@ -16,6 +16,8 @@ $(function () {
     }
     app.eventSocket = new EventSocket(app.tPort, app.host);
 
+    var expandBtn = templates.expandBtn();
+    expandBtn.$.appendTo('body');
     var loadingModal = templates.loadingModal();
     var fileModal = templates.fileModal();
     var startGameModal = templates.startGameModal();
