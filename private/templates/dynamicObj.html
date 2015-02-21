@@ -1,4 +1,4 @@
-<div jqfy:name="$item"></div>
+<div jqfy:name="$item" class="obj"><i class="dynamic-icon fa fa-fw" jqfy:name="$i"></i></div>
 <script>
 
     function setPos($d, x, y) {
@@ -7,17 +7,38 @@
     }
 
     function calcEnergyLevel(energy) {
-        return Math.floor(10* energy / app.consts.MAX_CELL_ENERGY);
+        return Math.floor(10 * energy / app.consts.MAX_CELL_ENERGY);
     }
 
     var _item;
+    var _world = null;
+
     obj.setData = function (item) {
         _item = item;
+        $i.attr('class', 'dynamic-icon fa fa-fw');
+//        if(item.other && item.other.teamId == 0){
+//            $i.addClass('fa-pied-piper-alt');
+//        }
+//        if(item.other && item.other.teamId == 1){
+//            $i.addClass('fa fa-paper-plane');
+//        }
         setPos($item, item.position.x, item.position.y);
         $item.attr('data-type', item.type);
         if (item.type == 'cell' && item.other != undefined) {
             var eLevel = calcEnergyLevel(item.other.energy);
             $item.attr('data-level', eLevel);
+        }
+        if (_world) {
+            var height = 10;
+            var block = _world.staticsAt(item.position.x, item.position.y);
+            var blockData;
+            if (block != undefined) {
+                blockData = block.getData();
+            }
+            if (blockData != undefined && blockData.other != undefined && blockData.other.height != undefined) {
+                height = blockData.other.height;
+            }
+            $item.attr('data-height', height);
         }
     };
 
@@ -27,6 +48,11 @@
 
     obj.remove = function () {
         obj.$.remove();
-    }
+    };
+
+    obj.appendTo = function (world) {
+        _world = world;
+        obj.$.appendTo(world.board.$board);
+    };
 
 </script>

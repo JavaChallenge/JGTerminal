@@ -26,70 +26,6 @@ $(function () {
 
     loadingModal.show();
 
-    var io = new (function () {
-        var rooms = {};
-        this.to = function (room) {
-            var r = rooms[room];
-            if (r == undefined) {
-                r = new events.EventEmitter();
-                rooms[room] = r;
-            }
-            return r;
-        };
-    })();
-
-    window.ioClient = function () {
-        var ioSocket = new IOSocket();
-        var socket = ioSocket.serverSocket;
-        var _view = null;
-
-        socket.on('join', function (view) {
-            _view = view;
-            var data = client.getViewData(view);
-            io.to(view)
-                .emit('diff', data);
-        });
-
-        io.to('_clients')
-            .on('info', function (info) {
-                log('info');
-                log(info);
-                socket.emit('info', info);
-
-                _(info.views)
-                    .each(function (view) {
-                        io
-                            .to(view)
-                            .on('turn', function (turn, data) {
-                                if (view == _view) {
-                                    socket.emit('turn', turn, data);
-                                }
-                            });
-                        io.to(view)
-                            .on('diff', function (diff) {
-                                log('diff');
-                                var _view = display.getView();
-                                if (view == _view) {
-                                    socket.emit('diff', diff);
-                                }
-                            });
-                    })
-                    .value();
-            });
-
-        io.to('_clients')
-            .on('map', function (map) {
-                log('map');
-                socket.emit('map', map);
-            });
-
-        setTimeout(function () {
-            socket.emit('connect');
-        }, 100);
-
-        return ioSocket.clientSocket;
-    };
-
     fileModal.on('newGame', function (val) {
         if (process.env.JGF_MAP_PATH !== undefined) {
             val = process.env.JGF_MAP_PATH;
@@ -99,8 +35,14 @@ $(function () {
         startGameModal.show();
         setTimeout(function () {
 
-            client = new Client(io, app.uPort, app.host);
-            display = new Display(ioClient(), client);
+            client = new Client(window.io, app.uPort, app.host);
+            var ioConnection = ioClient();
+            ioConnection.socket.on('join', function (view) {
+                var data = client.getViewData(view);
+                io.to(view)
+                    .emit('diff', data);
+            });
+            display = new Display(ioConnection.connect(), client);
         }, 100);
     });
 

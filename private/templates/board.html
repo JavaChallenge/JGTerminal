@@ -1,88 +1,26 @@
-<div jqfy:name="$boardContainer" class="board-container board3d">
+<div jqfy:name="$boardContainer" class="board-container">
     <div jqfy:name="$board" class="board"></div>
 </div>
 <script>
     var events = require('events');
 
     var log = require('debug')('JGF:board');
-    var diffLog = require('debug')('JGF:diff');
     $.extend(obj, events.EventEmitter.prototype);
-
-    var statics = {};
-    var dynamics = {};
 
     obj.setMapSize = function (size) {
         $board.width(24 * size.width);
         $board.height(27 * size.height);
-
     };
 
-    obj.setMap = function (map) {
-        var mapById = {};
-        _(map)
-                .each(function (item) {
-                    mapById[item.id] = true;
-                    if (statics[item.id] == undefined) {
-                        statics[item.id] = templates.staticObject();
-                        statics[item.id].$.appendTo($board);
-                    }
-                    statics[item.id].setData(item, true);
-                })
-                .value();
-        _(statics)
-                .each(function (item, id) {
-                    if (mapById[id] == undefined) {
-                        item.remove();
-                        delete statics[id];
-                    }
-                })
-                .value();
+    obj.set3d = function (_3d) {
+        log('3d', _3d);
+        if (_3d) {
+            $boardContainer.addClass('board3d');
+        } else {
+            $boardContainer.removeClass('board3d');
+        }
     };
 
-    obj.setDiff = function (diff) {
-        log('set diff');
-        diffLog(diff);
-        _(diff)
-                .each(function (item) {
-                    if (statics[item.id] == undefined) {
-                        statics[item.id] = templates.staticObject();
-                    }
-                    statics[item.id].setData(item, true);
-                })
-                .value();
-    };
-
-    obj.on('turn', function (data) {
-        _(data.statics)
-                .each(function (item) {
-                    if (statics[item.id] == undefined) {
-                        statics[item.id] = templates.staticObject();
-                        statics[item.id].$.appendTo($board);
-                    }
-                    statics[item.id].setData(item);
-                })
-                .value();
-        var itemsById = {};
-        _(data.dynamics)
-                .each(function (item) {
-                    itemsById[item.id] = true;
-                    if (dynamics[item.id] == undefined) {
-                        dynamics[item.id] = templates.dynamicObj();
-                        dynamics[item.id].$.appendTo($board);
-                    }
-                    dynamics[item.id].setData(item);
-                })
-                .value();
-
-        _(dynamics)
-                .each(function (item, id) {
-                    if (itemsById[id] == undefined) {
-                        item.remove();
-                        delete dynamics[id];
-                    }
-                })
-                .value();
-    });
-
+    obj.$board = $board;
 
 </script>

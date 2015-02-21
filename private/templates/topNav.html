@@ -11,7 +11,7 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav">
-            <li jqfy:name="$3dli" class="active">
+            <li jqfy:name="$3dli">
                 <a jqfy:name="$3dBtn">3D/2D</a>
             </li>
             <li><a href="#" jqfy:name="$closeBtn">Stop Server</a></li>
@@ -31,19 +31,23 @@
     };
 
     var _views = {};
-    var _3d = true;
+    var _3d = false;
 
     $3dBtn.on('click', function (e) {
         e.preventDefault();
-        _3d = !_3d;
+        obj.set3d(!_3d);
+        return false;
+    });
+
+    obj.set3d = function (d) {
+        _3d = d;
         if (_3d) {
             $3dli.addClass('active');
         } else {
             $3dli.removeClass('active');
         }
         obj.emit('3d', _3d);
-        return false;
-    });
+    };
 
     $closeBtn.on('click', function (e) {
         e.preventDefault();

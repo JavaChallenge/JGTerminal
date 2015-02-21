@@ -8,6 +8,8 @@
     }
 
     var _item;
+    var _world = null;
+
     obj.setData = function (item, force) {
         if (force == undefined) {
             force = false;
@@ -41,8 +43,13 @@
         return _item;
     };
 
-    obj.remove = function(){
+    obj.remove = function () {
         obj.$.remove();
+    };
+
+    obj.appendTo = function (world) {
+        _world = world;
+        obj.$.appendTo(world.board.$board);
     }
 
 </script>

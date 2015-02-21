@@ -16,7 +16,7 @@
         var $root = $('<div/>');
         
         var $boardContainer = $('<div/>')
-            .addClass("board-container board3d")
+            .addClass("board-container")
             .appendTo($root);
         
         var $board = $('<div/>')
@@ -30,85 +30,23 @@
             var events = require('events');
         
             var log = require('debug')('JGF:board');
-            var diffLog = require('debug')('JGF:diff');
             $.extend(obj, events.EventEmitter.prototype);
-        
-            var statics = {};
-            var dynamics = {};
         
             obj.setMapSize = function (size) {
                 $board.width(24 * size.width);
                 $board.height(27 * size.height);
-        
             };
         
-            obj.setMap = function (map) {
-                var mapById = {};
-                _(map)
-                        .each(function (item) {
-                            mapById[item.id] = true;
-                            if (statics[item.id] == undefined) {
-                                statics[item.id] = templates.staticObject();
-                                statics[item.id].$.appendTo($board);
-                            }
-                            statics[item.id].setData(item, true);
-                        })
-                        .value();
-                _(statics)
-                        .each(function (item, id) {
-                            if (mapById[id] == undefined) {
-                                item.remove();
-                                delete statics[id];
-                            }
-                        })
-                        .value();
+            obj.set3d = function (_3d) {
+                log('3d', _3d);
+                if (_3d) {
+                    $boardContainer.addClass('board3d');
+                } else {
+                    $boardContainer.removeClass('board3d');
+                }
             };
         
-            obj.setDiff = function (diff) {
-                log('set diff');
-                diffLog(diff);
-                _(diff)
-                        .each(function (item) {
-                            if (statics[item.id] == undefined) {
-                                statics[item.id] = templates.staticObject();
-                            }
-                            statics[item.id].setData(item, true);
-                        })
-                        .value();
-            };
-        
-            obj.on('turn', function (data) {
-                _(data.statics)
-                        .each(function (item) {
-                            if (statics[item.id] == undefined) {
-                                statics[item.id] = templates.staticObject();
-                                statics[item.id].$.appendTo($board);
-                            }
-                            statics[item.id].setData(item);
-                        })
-                        .value();
-                var itemsById = {};
-                _(data.dynamics)
-                        .each(function (item) {
-                            itemsById[item.id] = true;
-                            if (dynamics[item.id] == undefined) {
-                                dynamics[item.id] = templates.dynamicObj();
-                                dynamics[item.id].$.appendTo($board);
-                            }
-                            dynamics[item.id].setData(item);
-                        })
-                        .value();
-        
-                _(dynamics)
-                        .each(function (item, id) {
-                            if (itemsById[id] == undefined) {
-                                item.remove();
-                                delete dynamics[id];
-                            }
-                        })
-                        .value();
-            });
-        
+            obj.$board = $board;
         
         
         //  end script 1
@@ -159,7 +97,13 @@
         var $root = $('<div/>');
         
         var $item = $('<div/>')
+            .addClass("obj")
             .appendTo($root);
+        
+        var $i = $('<i/>')
+            .addClass("dynamic-icon fa fa-fw")
+            .appendTo($item);
+        //   end $i
         //  end $item
         
         // start script 1
@@ -171,17 +115,38 @@
             }
         
             function calcEnergyLevel(energy) {
-                return Math.floor(10* energy / app.consts.MAX_CELL_ENERGY);
+                return Math.floor(10 * energy / app.consts.MAX_CELL_ENERGY);
             }
         
             var _item;
+            var _world = null;
+        
             obj.setData = function (item) {
                 _item = item;
+                $i.attr('class', 'dynamic-icon fa fa-fw');
+        //        if(item.other && item.other.teamId == 0){
+        //            $i.addClass('fa-pied-piper-alt');
+        //        }
+        //        if(item.other && item.other.teamId == 1){
+        //            $i.addClass('fa fa-paper-plane');
+        //        }
                 setPos($item, item.position.x, item.position.y);
                 $item.attr('data-type', item.type);
                 if (item.type == 'cell' && item.other != undefined) {
                     var eLevel = calcEnergyLevel(item.other.energy);
                     $item.attr('data-level', eLevel);
+                }
+                if (_world) {
+                    var height = 10;
+                    var block = _world.staticsAt(item.position.x, item.position.y);
+                    var blockData;
+                    if (block != undefined) {
+                        blockData = block.getData();
+                    }
+                    if (blockData != undefined && blockData.other != undefined && blockData.other.height != undefined) {
+                        height = blockData.other.height;
+                    }
+                    $item.attr('data-height', height);
                 }
             };
         
@@ -191,7 +156,12 @@
         
             obj.remove = function () {
                 obj.$.remove();
-            }
+            };
+        
+            obj.appendTo = function (world) {
+                _world = world;
+                obj.$.appendTo(world.board.$board);
+            };
         
         
         //  end script 1
@@ -489,12 +459,9 @@
         
         // start script 1
         
-            var events = require('events');
-            $.extend(obj, events.EventEmitter.prototype);
-        
-            obj.on('turn', function (turn) {
+            obj.setTurn = function (turn) {
                 $turn.text(' '+turn);
-            })
+            };
         
         //  end script 1
         
@@ -1153,6 +1120,8 @@
             }
         
             var _item;
+            var _world = null;
+        
             obj.setData = function (item, force) {
                 if (force == undefined) {
                     force = false;
@@ -1186,8 +1155,13 @@
                 return _item;
             };
         
-            obj.remove = function(){
+            obj.remove = function () {
                 obj.$.remove();
+            };
+        
+            obj.appendTo = function (world) {
+                _world = world;
+                obj.$.appendTo(world.board.$board);
             }
         
         
@@ -1261,7 +1235,6 @@
             .appendTo($div2);
         
         var $3dli = $('<li/>')
-            .addClass("active")
             .appendTo($ul1);
         
         var $3dBtn = $('<a/>')
@@ -1306,19 +1279,23 @@
             };
         
             var _views = {};
-            var _3d = true;
+            var _3d = false;
         
             $3dBtn.on('click', function (e) {
                 e.preventDefault();
-                _3d = !_3d;
+                obj.set3d(!_3d);
+                return false;
+            });
+        
+            obj.set3d = function (d) {
+                _3d = d;
                 if (_3d) {
                     $3dli.addClass('active');
                 } else {
                     $3dli.removeClass('active');
                 }
                 obj.emit('3d', _3d);
-                return false;
-            });
+            };
         
             $closeBtn.on('click', function (e) {
                 e.preventDefault();

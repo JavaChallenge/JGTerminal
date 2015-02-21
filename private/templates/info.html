@@ -2,10 +2,7 @@
     <span>turn: <span jqfy:name="$turn"></span><br></span>
 </div>
 <script>
-    var events = require('events');
-    $.extend(obj, events.EventEmitter.prototype);
-
-    obj.on('turn', function (turn) {
+    obj.setTurn = function (turn) {
         $turn.text(' '+turn);
-    })
+    };
 </script>
