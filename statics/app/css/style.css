@@ -775,6 +775,325 @@ span.label-blue-grey.label-darker {
   padding-top: 9px;
   padding-bottom: 9px;
 }
+.obj .dynamic-icon {
+  position: absolute;
+  top: 1px;
+  left: -1px;
+  right: 0;
+  bottom: 0;
+  font-size: 1.4em;
+}
+.obj[data-type="cell"] {
+  transition: bottom 0.5s, left 0.5s, background-color 0.5s, -webkit-transform 0.5s;
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  border-radius: 23px;
+  margin-bottom: 1px;
+  margin-left: 2.804375px;
+  background-color: #ffff00;
+  z-index: 100;
+}
+.obj[data-type="cell"][data-energy="0"] {
+  -webkit-transform: scale(0.4);
+}
+.obj[data-type="cell"][data-energy="1"] {
+  -webkit-transform: scale(0.43);
+}
+.obj[data-type="cell"][data-energy="2"] {
+  -webkit-transform: scale(0.46);
+}
+.obj[data-type="cell"][data-energy="3"] {
+  -webkit-transform: scale(0.49);
+}
+.obj[data-type="cell"][data-energy="4"] {
+  -webkit-transform: scale(0.52);
+}
+.obj[data-type="cell"][data-energy="5"] {
+  -webkit-transform: scale(0.55);
+}
+.obj[data-type="cell"][data-energy="6"] {
+  -webkit-transform: scale(0.58);
+}
+.obj[data-type="cell"][data-energy="7"] {
+  -webkit-transform: scale(0.61);
+}
+.obj[data-type="cell"][data-energy="8"] {
+  -webkit-transform: scale(0.64);
+}
+.obj[data-type="cell"][data-energy="9"] {
+  -webkit-transform: scale(0.67);
+}
+.obj[data-type="cell"][data-energy="10"] {
+  -webkit-transform: scale(0.7);
+}
+.obj[data-type="cell"][data-team="0"][data-energy="0"] {
+  background-color: #ffff00;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="1"] {
+  background-color: #ffee00;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="2"] {
+  background-color: #ffdd00;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="3"] {
+  background-color: #ffcc00;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="4"] {
+  background-color: #ffbb00;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="5"] {
+  background-color: #ffaa00;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="6"] {
+  background-color: #ff9900;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="7"] {
+  background-color: #ff8800;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="8"] {
+  background-color: #ff7700;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="9"] {
+  background-color: #ff6600;
+}
+.obj[data-type="cell"][data-team="0"][data-energy="10"] {
+  background-color: #ff5500;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="0"] {
+  background-color: #606020;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="1"] {
+  background-color: #605b20;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="2"] {
+  background-color: #605720;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="3"] {
+  background-color: #605320;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="4"] {
+  background-color: #604f20;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="5"] {
+  background-color: #604a20;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="6"] {
+  background-color: #604620;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="7"] {
+  background-color: #604220;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="8"] {
+  background-color: #603e20;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="9"] {
+  background-color: #603920;
+}
+.obj[data-type="cell"][data-team="1"][data-energy="10"] {
+  background-color: #603520;
+}
+.block {
+  position: absolute;
+  height: 25px;
+  width: 14.435px;
+  margin: 0 7.2175px;
+  border-bottom: solid 0;
+  border-top: solid 0;
+}
+.block:before,
+.block:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 17.6775px;
+  height: 17.6775px;
+  -webkit-transform: scaleX(0.5774) rotate(-45deg);
+  -ms-transform: scaleX(0.5774) rotate(-45deg);
+  transform: scaleX(0.5774) rotate(-45deg);
+  background-color: inherit;
+  top: 3.661175px;
+}
+.block:before {
+  left: -8.838825px;
+  border-left: solid 0;
+  border-top: solid 0;
+  border-color: inherit;
+}
+.block:after {
+  right: -8.838825px;
+  border-right: solid 0;
+  border-bottom: solid 0;
+  border-color: inherit;
+}
+.block .static-icon {
+  position: absolute;
+  top: 5px;
+  left: -2px;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+}
+.block[data-type="normal"][data-height="0"] {
+  background-color: #266f73 !important;
+  border-color: #266f73 !important;
+}
+.block[data-type="normal"][data-height="1"] {
+  background-color: #2d8186 !important;
+  border-color: #2d8186 !important;
+}
+.block[data-type="normal"][data-height="2"] {
+  background-color: #339499 !important;
+  border-color: #339499 !important;
+}
+.block[data-type="normal"][data-height="3"] {
+  background-color: #39a6ac !important;
+  border-color: #39a6ac !important;
+}
+.block[data-type="normal"][data-height="4"] {
+  background-color: #40b9bf !important;
+  border-color: #40b9bf !important;
+}
+.block[data-type="normal"][data-height="5"] {
+  background-color: #53c0c6 !important;
+  border-color: #53c0c6 !important;
+}
+.block[data-type="normal"][data-height="6"] {
+  background-color: #66c7cc !important;
+  border-color: #66c7cc !important;
+}
+.block[data-type="normal"][data-height="7"] {
+  background-color: #79ced2 !important;
+  border-color: #79ced2 !important;
+}
+.block[data-type="normal"][data-height="8"] {
+  background-color: #8cd5d9 !important;
+  border-color: #8cd5d9 !important;
+}
+.block[data-type="normal"][data-height="9"] {
+  background-color: #9fdcdf !important;
+  border-color: #9fdcdf !important;
+}
+.block[data-type="resource"][data-resource="0"] .static-icon {
+  opacity: 0;
+}
+.block[data-type="resource"][data-resource="1"] .static-icon {
+  opacity: 0.1;
+}
+.block[data-type="resource"][data-resource="2"] .static-icon {
+  opacity: 0.2;
+}
+.block[data-type="resource"][data-resource="3"] .static-icon {
+  opacity: 0.3;
+}
+.block[data-type="resource"][data-resource="4"] .static-icon {
+  opacity: 0.4;
+}
+.block[data-type="resource"][data-resource="5"] .static-icon {
+  opacity: 0.5;
+}
+.block[data-type="resource"][data-resource="6"] .static-icon {
+  opacity: 0.6;
+}
+.block[data-type="resource"][data-resource="7"] .static-icon {
+  opacity: 0.7;
+}
+.block[data-type="resource"][data-resource="8"] .static-icon {
+  opacity: 0.8;
+}
+.block[data-type="resource"][data-resource="9"] .static-icon {
+  opacity: 0.9;
+}
+.block[data-type="resource"][data-resource="10"] .static-icon {
+  opacity: 1;
+}
+.block[data-type="resource"][data-height="0"] {
+  background-color: #267340 !important;
+  border-color: #266f73 !important;
+}
+.block[data-type="resource"][data-height="1"] {
+  background-color: #2d864a !important;
+  border-color: #2d8186 !important;
+}
+.block[data-type="resource"][data-height="2"] {
+  background-color: #339955 !important;
+  border-color: #339499 !important;
+}
+.block[data-type="resource"][data-height="3"] {
+  background-color: #39ac60 !important;
+  border-color: #39a6ac !important;
+}
+.block[data-type="resource"][data-height="4"] {
+  background-color: #40bf6a !important;
+  border-color: #40b9bf !important;
+}
+.block[data-type="resource"][data-height="5"] {
+  background-color: #53c679 !important;
+  border-color: #53c0c6 !important;
+}
+.block[data-type="resource"][data-height="6"] {
+  background-color: #66cc88 !important;
+  border-color: #66c7cc !important;
+}
+.block[data-type="resource"][data-height="7"] {
+  background-color: #79d297 !important;
+  border-color: #79ced2 !important;
+}
+.block[data-type="resource"][data-height="8"] {
+  background-color: #8cd9a6 !important;
+  border-color: #8cd5d9 !important;
+}
+.block[data-type="resource"][data-height="9"] {
+  background-color: #9fdfb5 !important;
+  border-color: #9fdcdf !important;
+}
+.block[data-type="mitosis"][data-height="0"] {
+  background-color: #4c2673 !important;
+  border-color: #4c2673 !important;
+}
+.block[data-type="mitosis"][data-height="1"] {
+  background-color: #592d86 !important;
+  border-color: #592d86 !important;
+}
+.block[data-type="mitosis"][data-height="2"] {
+  background-color: #663399 !important;
+  border-color: #663399 !important;
+}
+.block[data-type="mitosis"][data-height="3"] {
+  background-color: #7339ac !important;
+  border-color: #7339ac !important;
+}
+.block[data-type="mitosis"][data-height="4"] {
+  background-color: #7f40bf !important;
+  border-color: #7f40bf !important;
+}
+.block[data-type="mitosis"][data-height="5"] {
+  background-color: #8c53c6 !important;
+  border-color: #8c53c6 !important;
+}
+.block[data-type="mitosis"][data-height="6"] {
+  background-color: #9966cc !important;
+  border-color: #9966cc !important;
+}
+.block[data-type="mitosis"][data-height="7"] {
+  background-color: #a679d2 !important;
+  border-color: #a679d2 !important;
+}
+.block[data-type="mitosis"][data-height="8"] {
+  background-color: #b28cd9 !important;
+  border-color: #b28cd9 !important;
+}
+.block[data-type="mitosis"][data-height="9"] {
+  background-color: #bf9fdf !important;
+  border-color: #bf9fdf !important;
+}
+.block[data-type="none"] {
+  background-color: #808080 !important;
+  border-color: #808080 !important;
+}
+.block[data-type="impassable"] {
+  opacity: 0;
+}
 .board {
   position: absolute;
   top: 0;
@@ -803,438 +1122,4 @@ span.label-blue-grey.label-darker {
 }
 .board3d [data-type="cell"] {
   transform: rotateX(-45deg);
-}
-[data-type=cell] {
-  transition: bottom 0.5s, left 0.5s, background-color 0.5s, -webkit-transform 0.5s;
-  position: absolute;
-  width: 23px;
-  height: 23px;
-  border-radius: 23px;
-  margin-bottom: 1px;
-  margin-left: 2.804375px;
-  background-color: #ffff00;
-}
-.block {
-  position: absolute;
-  width: 14.435px;
-  height: 25px;
-  background-color: #64C7CC;
-  margin: 0 7.2175px;
-  transition: background-color 0.5s, opacity 0.5s;
-}
-.block:before,
-.block:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  border-bottom: 12.5px solid transparent;
-  border-top: 12.5px solid transparent;
-  transition: border-color 0.5s;
-}
-.block:before {
-  right: 100%;
-  border-right: 7.2175px solid #64c7cc;
-}
-.block:after {
-  left: 100%;
-  width: 0;
-  border-left: 7.2175px solid #64c7cc;
-}
-[data-type="normal"][data-height="0"] {
-  background-color: #266f73;
-}
-[data-type="normal"][data-height="0"]:before {
-  border-right-color: #266f73;
-}
-[data-type="normal"][data-height="0"]:after {
-  border-left-color: #266f73;
-}
-[data-type="normal"][data-height="1"] {
-  background-color: #2d8186;
-}
-[data-type="normal"][data-height="1"]:before {
-  border-right-color: #2d8186;
-}
-[data-type="normal"][data-height="1"]:after {
-  border-left-color: #2d8186;
-}
-[data-type="normal"][data-height="2"] {
-  background-color: #339499;
-}
-[data-type="normal"][data-height="2"]:before {
-  border-right-color: #339499;
-}
-[data-type="normal"][data-height="2"]:after {
-  border-left-color: #339499;
-}
-[data-type="normal"][data-height="3"] {
-  background-color: #39a6ac;
-}
-[data-type="normal"][data-height="3"]:before {
-  border-right-color: #39a6ac;
-}
-[data-type="normal"][data-height="3"]:after {
-  border-left-color: #39a6ac;
-}
-[data-type="normal"][data-height="4"] {
-  background-color: #40b9bf;
-}
-[data-type="normal"][data-height="4"]:before {
-  border-right-color: #40b9bf;
-}
-[data-type="normal"][data-height="4"]:after {
-  border-left-color: #40b9bf;
-}
-[data-type="normal"][data-height="5"] {
-  background-color: #53c0c6;
-}
-[data-type="normal"][data-height="5"]:before {
-  border-right-color: #53c0c6;
-}
-[data-type="normal"][data-height="5"]:after {
-  border-left-color: #53c0c6;
-}
-[data-type="normal"][data-height="6"] {
-  background-color: #66c7cc;
-}
-[data-type="normal"][data-height="6"]:before {
-  border-right-color: #66c7cc;
-}
-[data-type="normal"][data-height="6"]:after {
-  border-left-color: #66c7cc;
-}
-[data-type="normal"][data-height="7"] {
-  background-color: #79ced2;
-}
-[data-type="normal"][data-height="7"]:before {
-  border-right-color: #79ced2;
-}
-[data-type="normal"][data-height="7"]:after {
-  border-left-color: #79ced2;
-}
-[data-type="normal"][data-height="8"] {
-  background-color: #8cd5d9;
-}
-[data-type="normal"][data-height="8"]:before {
-  border-right-color: #8cd5d9;
-}
-[data-type="normal"][data-height="8"]:after {
-  border-left-color: #8cd5d9;
-}
-[data-type="normal"][data-height="9"] {
-  background-color: #9fdcdf;
-}
-[data-type="normal"][data-height="9"]:before {
-  border-right-color: #9fdcdf;
-}
-[data-type="normal"][data-height="9"]:after {
-  border-left-color: #9fdcdf;
-}
-[data-type="resource"][data-height="0"] {
-  background-color: #267340;
-}
-[data-type="resource"][data-height="0"]:before {
-  border-right-color: #267340;
-}
-[data-type="resource"][data-height="0"]:after {
-  border-left-color: #267340;
-}
-[data-type="resource"][data-height="1"] {
-  background-color: #2d864a;
-}
-[data-type="resource"][data-height="1"]:before {
-  border-right-color: #2d864a;
-}
-[data-type="resource"][data-height="1"]:after {
-  border-left-color: #2d864a;
-}
-[data-type="resource"][data-height="2"] {
-  background-color: #339955;
-}
-[data-type="resource"][data-height="2"]:before {
-  border-right-color: #339955;
-}
-[data-type="resource"][data-height="2"]:after {
-  border-left-color: #339955;
-}
-[data-type="resource"][data-height="3"] {
-  background-color: #39ac60;
-}
-[data-type="resource"][data-height="3"]:before {
-  border-right-color: #39ac60;
-}
-[data-type="resource"][data-height="3"]:after {
-  border-left-color: #39ac60;
-}
-[data-type="resource"][data-height="4"] {
-  background-color: #40bf6a;
-}
-[data-type="resource"][data-height="4"]:before {
-  border-right-color: #40bf6a;
-}
-[data-type="resource"][data-height="4"]:after {
-  border-left-color: #40bf6a;
-}
-[data-type="resource"][data-height="5"] {
-  background-color: #53c679;
-}
-[data-type="resource"][data-height="5"]:before {
-  border-right-color: #53c679;
-}
-[data-type="resource"][data-height="5"]:after {
-  border-left-color: #53c679;
-}
-[data-type="resource"][data-height="6"] {
-  background-color: #66cc88;
-}
-[data-type="resource"][data-height="6"]:before {
-  border-right-color: #66cc88;
-}
-[data-type="resource"][data-height="6"]:after {
-  border-left-color: #66cc88;
-}
-[data-type="resource"][data-height="7"] {
-  background-color: #79d297;
-}
-[data-type="resource"][data-height="7"]:before {
-  border-right-color: #79d297;
-}
-[data-type="resource"][data-height="7"]:after {
-  border-left-color: #79d297;
-}
-[data-type="resource"][data-height="8"] {
-  background-color: #8cd9a6;
-}
-[data-type="resource"][data-height="8"]:before {
-  border-right-color: #8cd9a6;
-}
-[data-type="resource"][data-height="8"]:after {
-  border-left-color: #8cd9a6;
-}
-[data-type="resource"][data-height="9"] {
-  background-color: #9fdfb5;
-}
-[data-type="resource"][data-height="9"]:before {
-  border-right-color: #9fdfb5;
-}
-[data-type="resource"][data-height="9"]:after {
-  border-left-color: #9fdfb5;
-}
-[data-type="mitosis"][data-height="0"] {
-  background-color: #4c2673;
-}
-[data-type="mitosis"][data-height="0"]:before {
-  border-right-color: #4c2673;
-}
-[data-type="mitosis"][data-height="0"]:after {
-  border-left-color: #4c2673;
-}
-[data-type="mitosis"][data-height="1"] {
-  background-color: #592d86;
-}
-[data-type="mitosis"][data-height="1"]:before {
-  border-right-color: #592d86;
-}
-[data-type="mitosis"][data-height="1"]:after {
-  border-left-color: #592d86;
-}
-[data-type="mitosis"][data-height="2"] {
-  background-color: #663399;
-}
-[data-type="mitosis"][data-height="2"]:before {
-  border-right-color: #663399;
-}
-[data-type="mitosis"][data-height="2"]:after {
-  border-left-color: #663399;
-}
-[data-type="mitosis"][data-height="3"] {
-  background-color: #7339ac;
-}
-[data-type="mitosis"][data-height="3"]:before {
-  border-right-color: #7339ac;
-}
-[data-type="mitosis"][data-height="3"]:after {
-  border-left-color: #7339ac;
-}
-[data-type="mitosis"][data-height="4"] {
-  background-color: #7f40bf;
-}
-[data-type="mitosis"][data-height="4"]:before {
-  border-right-color: #7f40bf;
-}
-[data-type="mitosis"][data-height="4"]:after {
-  border-left-color: #7f40bf;
-}
-[data-type="mitosis"][data-height="5"] {
-  background-color: #8c53c6;
-}
-[data-type="mitosis"][data-height="5"]:before {
-  border-right-color: #8c53c6;
-}
-[data-type="mitosis"][data-height="5"]:after {
-  border-left-color: #8c53c6;
-}
-[data-type="mitosis"][data-height="6"] {
-  background-color: #9966cc;
-}
-[data-type="mitosis"][data-height="6"]:before {
-  border-right-color: #9966cc;
-}
-[data-type="mitosis"][data-height="6"]:after {
-  border-left-color: #9966cc;
-}
-[data-type="mitosis"][data-height="7"] {
-  background-color: #a679d2;
-}
-[data-type="mitosis"][data-height="7"]:before {
-  border-right-color: #a679d2;
-}
-[data-type="mitosis"][data-height="7"]:after {
-  border-left-color: #a679d2;
-}
-[data-type="mitosis"][data-height="8"] {
-  background-color: #b28cd9;
-}
-[data-type="mitosis"][data-height="8"]:before {
-  border-right-color: #b28cd9;
-}
-[data-type="mitosis"][data-height="8"]:after {
-  border-left-color: #b28cd9;
-}
-[data-type="mitosis"][data-height="9"] {
-  background-color: #bf9fdf;
-}
-[data-type="mitosis"][data-height="9"]:before {
-  border-right-color: #bf9fdf;
-}
-[data-type="mitosis"][data-height="9"]:after {
-  border-left-color: #bf9fdf;
-}
-[data-type="none"] {
-  background-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="none"]:before {
-  border-right-color: #808080;
-}
-[data-type="none"]:after {
-  border-left-color: #808080;
-}
-[data-type="impassable"] {
-  opacity: 0;
-}
-.block .static-icon {
-  position: absolute;
-  top: 5px;
-  left: -2px;
-  right: 0;
-  bottom: 0;
-}
-.obj .dynamic-icon {
-  position: absolute;
-  top: 1px;
-  left: -1px;
-  right: 0;
-  bottom: 0;
-  font-size: 1.4em;
-}
-[data-type="cell"] {
-  z-index: 100;
-}
-[data-type="cell"][data-level="0"] {
-  background-color: #ffff00;
-  -webkit-transform: scale(0.4);
-}
-[data-type="cell"][data-level="1"] {
-  background-color: #ffee00;
-  -webkit-transform: scale(0.43);
-}
-[data-type="cell"][data-level="2"] {
-  background-color: #ffdd00;
-  -webkit-transform: scale(0.46);
-}
-[data-type="cell"][data-level="3"] {
-  background-color: #ffcc00;
-  -webkit-transform: scale(0.49);
-}
-[data-type="cell"][data-level="4"] {
-  background-color: #ffbb00;
-  -webkit-transform: scale(0.52);
-}
-[data-type="cell"][data-level="5"] {
-  background-color: #ffaa00;
-  -webkit-transform: scale(0.55);
-}
-[data-type="cell"][data-level="6"] {
-  background-color: #ff9900;
-  -webkit-transform: scale(0.58);
-}
-[data-type="cell"][data-level="7"] {
-  background-color: #ff8800;
-  -webkit-transform: scale(0.61);
-}
-[data-type="cell"][data-level="8"] {
-  background-color: #ff7700;
-  -webkit-transform: scale(0.64);
-}
-[data-type="cell"][data-level="9"] {
-  background-color: #ff6600;
-  -webkit-transform: scale(0.67);
-}
-[data-type="cell"][data-level="10"] {
-  background-color: #ff5500;
-  -webkit-transform: scale(0.7);
 }

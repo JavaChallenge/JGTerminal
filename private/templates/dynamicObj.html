@@ -22,11 +22,16 @@
 //        if(item.other && item.other.teamId == 1){
 //            $i.addClass('fa fa-paper-plane');
 //        }
+
+        if (item.other) {
+            $item.attr('data-team', item.other.teamId);
+        }
+
         setPos($item, item.position.x, item.position.y);
         $item.attr('data-type', item.type);
         if (item.type == 'cell' && item.other != undefined) {
-            var eLevel = calcEnergyLevel(item.other.energy);
-            $item.attr('data-level', eLevel);
+            var energy = calcEnergyLevel(item.other.energy);
+            $item.attr('data-energy', energy);
         }
         if (_world) {
             var height = 10;

@@ -1,0 +1,43 @@
+.make-hexagon(@size, @border-size) {
+  & {
+    position: absolute;
+    height: @size;
+    width: @size * 0.01 * 57.74;
+    margin: 0 @size * 0.01 * 28.87;
+    border-bottom: solid @border-size;
+    border-top: solid @border-size;
+  }
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: @size * 0.01 * 70.71;
+    height: @size * 0.01 * 70.71;
+    -webkit-transform: scaleX(0.5774) rotate(-45deg);
+    -ms-transform: scaleX(0.5774) rotate(-45deg);
+    transform: scaleX(0.5774) rotate(-45deg);
+    background-color: inherit;
+    top: @size * 0.01 * 14.6447 - @border-size;
+  }
+
+  &:before {
+    left: @size * 0.01 * -35.3553;
+    border-left: solid @border-size * 1.41421;
+    border-top: solid @border-size * 1.41421;
+    border-color: inherit;
+  }
+
+  &:after {
+    right: @size * 0.01 * -35.3553;
+    border-right: solid @border-size * 1.41421;
+    border-bottom: solid @border-size * 1.41421;
+    border-color: inherit;
+  }
+}
+
+.make-hexagon-color(@color, @border-color) {
+  background-color: @color !important;
+  border-color: @border-color !important;
+}

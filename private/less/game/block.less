@@ -1,0 +1,68 @@
+@import "../lib/hexagon";
+@import "variable";
+
+.block {
+  .make-hexagon(@block-size, 0);
+}
+
+.block .static-icon {
+  position: absolute;
+  top: 5px;
+  left: -2px;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+}
+
+.block[data-type="normal"] {
+  .for(0, 9);
+  .-each(@i) {
+    @color: hsl(183, 0.5,.3 + @i*0.05);
+    &[data-height="@{i}"] {
+      .make-hexagon-color(@color, @color);
+    }
+  }
+}
+
+.block[data-type="resource"] {
+  .for(0, 10);
+  .-each(@i) {
+    &[data-resource="@{i}"] {
+      //      .make-hexagon(@block-size, @block-size * (10 - @i) * 0.05);
+      .static-icon {
+        //        top: 5px - @block-size * (10 - @i) * 0.05
+        opacity: @i * 0.1;
+      }
+    }
+  }
+}
+
+.block[data-type="resource"] {
+  .for(0, 9);
+  .-each(@i) {
+    @color: hsl(140, 0.5,.3 + @i*0.05);
+    @border-color: hsl(183, 0.5,.3 + @i*0.05);
+    &[data-height="@{i}"] {
+      .make-hexagon-color(@color, @border-color);
+    }
+  }
+}
+
+.block[data-type="mitosis"] {
+  .for(0, 9);
+  .-each(@i) {
+    @color: hsl(270, 0.5,.3 + @i*0.05);
+    &[data-height="@{i}"] {
+      .make-hexagon-color(@color, @color);
+    }
+  }
+}
+
+.block[data-type="none"] {
+  @color: hsl(0, 0, .5);
+  .make-hexagon-color(@color, @color);
+}
+
+.block[data-type="impassable"] {
+  opacity: 0;
+}

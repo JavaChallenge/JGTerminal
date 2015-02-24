@@ -130,11 +130,16 @@
         //        if(item.other && item.other.teamId == 1){
         //            $i.addClass('fa fa-paper-plane');
         //        }
+        
+                if (item.other) {
+                    $item.attr('data-team', item.other.teamId);
+                }
+        
                 setPos($item, item.position.x, item.position.y);
                 $item.attr('data-type', item.type);
                 if (item.type == 'cell' && item.other != undefined) {
-                    var eLevel = calcEnergyLevel(item.other.energy);
-                    $item.attr('data-level', eLevel);
+                    var energy = calcEnergyLevel(item.other.energy);
+                    $item.attr('data-energy', energy);
                 }
                 if (_world) {
                     var height = 10;
@@ -1122,6 +1127,17 @@
             var _item;
             var _world = null;
         
+            function calcResourceLevel(resource) {
+                var o = Math.floor(10 * resource / app.consts.MAX_BLOCK_RESOURCE);
+                if (o < 0) {
+                    o = 0;
+                }
+                if (o > 10) {
+                    o = 10;
+                }
+                return o;
+            }
+        
             obj.setData = function (item, force) {
                 if (force == undefined) {
                     force = false;
@@ -1145,6 +1161,9 @@
                 }
                 if (item.type == 'resource') {
                     $i.attr('class', 'static-icon fa fa-fw fa-pagelines');
+                    if (item.other && item.other.resource !== undefined) {
+                        $item.attr('data-resource', calcResourceLevel(item.other.resource));
+                    }
                 }
                 if (item.type == 'mitosis') {
                     $i.attr('class', 'static-icon fa fa-fw fa-share-alt');

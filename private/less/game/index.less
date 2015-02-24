@@ -1,85 +1,11 @@
-@rotation: 45deg;
-@time: 0.5s;
 
-.board {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin-right: auto;
-  margin-left: auto;
-  transition: -webkit-transform 1.75s;
-}
 
-.board {
-  transform-style: preserve-3d;
-  -webkit-transform: perspective(600px) rotateX(0deg);
-  -moz-transform: perspective(600px) rotateX(0deg);
-  -ms-transform: perspective(600px) rotateX(0deg);
-  -o-transform: perspective(600px) rotateX(0deg);
-  transform: perspective(600px) rotateX(0deg);
-}
 
-.board3d {
-  .board {
-    transform-style: preserve-3d;
-    -webkit-transform: perspective(600px) rotateX(@rotation);
-    -moz-transform: perspective(600px) rotateX(@rotation);
-    -ms-transform: perspective(600px) rotateX(@rotation);
-    -o-transform: perspective(600px) rotateX(@rotation);
-    transform: perspective(600px) rotateX(@rotation);
-  }
 
-  [data-type="cell"] {
-    transform: rotateX(-@rotation);
-  }
-}
 
-@block-size: 25px;
-@block-border: 10px;
-@cell-size: 23px;
-
-[data-type=cell] {
-  transition: bottom @time, left @time, background-color @time, -webkit-transform @time;
-  position: absolute;
-  width: @cell-size;
-  height: @cell-size;
-  border-radius: @cell-size;
-  margin-bottom: (@block-size - @cell-size) / 2;
-  margin-left: (@block-size * 0.2887 / 2 + @block-size - @cell-size) / 2;
-  background-color: hsl(60, 1, 0.5);
-}
-
-.block {
-  position: absolute;
-  width: @block-size * 0.5774;
-  height: @block-size;
-  background-color: #64C7CC;
-  margin: 0 (@block-size * 0.2887);
-  transition: background-color @time, opacity @time;
-}
-
-.block:before,
-.block:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  border-bottom: 0.5 * @block-size solid transparent;
-  border-top: 0.5 * @block-size solid transparent;
-  transition: border-color @time;
-}
-
-.block:before {
-  right: 100%;
-  border-right: @block-size * 0.2887 solid #64C7CC;
-}
-
-.block:after {
-  left: 100%;
-  width: 0;
-  border-left: @block-size * 0.2887 solid #64C7CC;
-}
+//.hexagon {
+//  .make-hexagon(200px, 10px, #ff0, #f0f)
+//}
 
 //.board3d {
 //  @height: 3px;
@@ -95,98 +21,9 @@
 //  }
 //}
 
-[data-type="normal"] {
-  .for(0, 9);
-  .-each(@i) {
-    @color: hsl(183, 0.5,.3 + @i*0.05);
-    &[data-height="@{i}"] {
-      background-color: @color;
 
-      &:before {
-        border-right-color: @color;
-      }
-      &:after {
-        border-left-color: @color;
-      }
-    }
-  }
-}
-
-[data-type="resource"] {
-  .for(0, 9);
-  .-each(@i) {
-    @color: hsl(140, 0.5,.3 + @i*0.05);
-    &[data-height="@{i}"] {
-      background-color: @color;
-
-      &:before {
-        border-right-color: @color;
-      }
-      &:after {
-        border-left-color: @color;
-      }
-    }
-  }
-}
-
-[data-type="mitosis"] {
-  .for(0, 9);
-  .-each(@i) {
-    @color: hsl(270, 0.5,.3 + @i*0.05);
-    &[data-height="@{i}"] {
-      background-color: @color;
-
-      &:before {
-        border-right-color: @color;
-      }
-      &:after {
-        border-left-color: @color;
-      }
-    }
-  }
-}
-
-[data-type="none"] {
-  .for(0, 9);
-  .-each(@i) {
-    @color: hsl(0, 0, .5);
-    background-color: @color;
-    &:before {
-      border-right-color: @color;
-    }
-    &:after {
-      border-left-color: @color;
-    }
-  }
-}
-
-[data-type="impassable"] {
-  opacity: 0;
-}
-
-.block .static-icon {
-  position: absolute;
-  top: 5px;
-  left: -2px;
-  right: 0;
-  bottom: 0;
-}
-.obj .dynamic-icon {
-  position: absolute;
-  top: 1px;
-  left: -1px;
-  right: 0;
-  bottom: 0;
-  font-size: 1.4em;
-}
-
-[data-type="cell"] {
-  z-index: 100;
-  .for(0, 10);
-  .-each(@i) {
-    &[data-level="@{i}"] {
-      background-color: hsl(60 - @i * 4, 1, 0.5);
-      -webkit-transform: scale(0.4 + @i * 0.03);
-    }
-  }
-}
+@import "variable";
+@import "../lib/hexagon";
+@import "cell";
+@import "block";
+@import "board";

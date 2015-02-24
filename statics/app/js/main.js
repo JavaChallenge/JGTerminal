@@ -7,6 +7,7 @@ $(function () {
 
     app.consts = {};
     app.consts.MAX_CELL_ENERGY = 100;
+    app.consts.MAX_BLOCK_RESOURCE = 300;
 
     app.tPort = 7001;
     app.uPort = 7000;

@@ -1,0 +1,34 @@
+.board {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  transition: -webkit-transform 1.75s;
+}
+
+.board {
+  transform-style: preserve-3d;
+  -webkit-transform: perspective(600px) rotateX(0deg);
+  -moz-transform: perspective(600px) rotateX(0deg);
+  -ms-transform: perspective(600px) rotateX(0deg);
+  -o-transform: perspective(600px) rotateX(0deg);
+  transform: perspective(600px) rotateX(0deg);
+}
+
+.board3d {
+  .board {
+    transform-style: preserve-3d;
+    -webkit-transform: perspective(600px) rotateX(@rotation);
+    -moz-transform: perspective(600px) rotateX(@rotation);
+    -ms-transform: perspective(600px) rotateX(@rotation);
+    -o-transform: perspective(600px) rotateX(@rotation);
+    transform: perspective(600px) rotateX(@rotation);
+  }
+
+  [data-type="cell"] {
+    transform: rotateX(-@rotation);
+  }
+}
